@@ -1,5 +1,8 @@
 from rest_framework import serializers
+import sys
+import os
 
+# sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)).replace("porfolio\\porfolio", "porfolio\\info"))
 from info.models import Education, Competence, Experience
 
 

@@ -1,16 +1,18 @@
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)).replace("porfolio\\porfolio", "porfolio\\info"))
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)).replace("porfolio\\porfolio", "porfolio\\info"))
+# sys.path.append(os.path.dirname(os.path.abspath(__file__)).replace("porfolio\\porfolio", "porfolio\\info"))
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
-
 import json
 from django.db.models import Q
 from decouple import config
 
 from django.core.mail import send_mail
 from django.conf import settings
+
 from info.forms import MessageForm
 from info.models import (
     Competence,
@@ -38,8 +40,8 @@ def homePage(request):
     context = {}
 
     if request.method == 'POST':
-        if request.POST.get('rechaptcha', None):
-            form = MessageForm(request.POST)
+        if request.POST.get('recaptcha', None):
+            form = forms.MessageForm(request.POST)
             if form.is_valid():
                 form.save(commit=False)
                 data = {
@@ -69,7 +71,7 @@ def homePage(request):
             'experiences': experiences,
             'projects': projects,
             'form': form,
-            'recaptcha_key': config("recaptcha_site_key", default="")
+            'recaptcha_key': config("recaptcha_site_key", default="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI")
         }
     return render(request, template_name, context)
 

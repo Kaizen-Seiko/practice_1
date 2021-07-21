@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .forms import EditProfileForm, CreateProjectForm
 from info.models import Information, Message, Project
-from .serializers import *
+
 
 class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
     def enforce_csrf(self, request):
@@ -173,8 +173,8 @@ def projects_api(request):
 
     return JsonResponse({'status': 'Bad Request'})
 
-
-
+from info.models import Education
+from .serializers import *
 
 
 class EducationView(APIView):
